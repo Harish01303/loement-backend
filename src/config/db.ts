@@ -24,41 +24,55 @@ import { WaterResource } from '../models/WaterResource';
 dotenv.config();
 
 const sequelize = new Sequelize({
-    database: process.env.DB_NAME,
-    dialect: 'postgres',
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT || '5432'),
-    models: [
-        User,
-        Farm,
-        OtpLog,
-        Role,
-        DroneProject,
-        SatelliteNDVIRecord,
-        IoTDevice,
-        ServiceBooking,
-        Payment,
-        WeatherForecast,
-        Wallet,
-        Crop,
-        ContentArticle,
-        Advisory,
-        DroneUpload,
-        Notification,
-        WalletTransaction,
-        DroneSurvey,
-        IoTData,
-        WaterResource
-    ],
-    logging: false, // Set to console.log to see SQL queries
-    dialectOptions: {
-        // ssl: {
-        //   require: true,
-        //   rejectUnauthorized: false 
-        // }
+  database: process.env.DB_NAME,
+  dialect: 'postgres',
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT || 5432),
+ 
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
     }
+  },
+ 
+  logging: false,
+ 
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+ 
+  retry: {
+    max: 3
+  },
+ 
+  models: [
+    User,
+    Farm,
+    OtpLog,
+    Role,
+    DroneProject,
+    SatelliteNDVIRecord,
+    IoTDevice,
+    ServiceBooking,
+    Payment,
+    WeatherForecast,
+    Wallet,
+    Crop,
+    ContentArticle,
+    Advisory,
+    DroneUpload,
+    Notification,
+    WalletTransaction,
+    DroneSurvey,
+    IoTData,
+    WaterResource
+  ]
 });
 
 export default sequelize;

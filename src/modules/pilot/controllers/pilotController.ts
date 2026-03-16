@@ -27,7 +27,7 @@ export const getBookingDetails = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const job = await PilotService.getBookingById(id, req.user.id);
+        const job = await PilotService.getBookingById(String(id), req.user.id);
         res.json({ success: true, job });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
@@ -41,7 +41,7 @@ export const updateJobStatus = async (req: Request, res: Response) => {
         }
         const { id } = req.params;
         const { status } = req.body;
-        const job = await PilotService.updateJobStatus(id, req.user.id, status);
+        const job = await PilotService.updateJobStatus(String(id), req.user.id, status);
         res.json({ success: true, job });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
@@ -65,7 +65,7 @@ export const uploadSurvey = async (req: Request, res: Response) => {
             preview_url: files['preview']?.[0]?.location,
         };
 
-        const survey = await PilotService.saveSurveyData(req.user.id, id, surveyData);
+        const survey = await PilotService.saveSurveyData(req.user.id, String(id), surveyData);
         res.status(201).json({ success: true, survey });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });

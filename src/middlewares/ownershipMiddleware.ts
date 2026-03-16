@@ -269,7 +269,7 @@ export const verifyPilotAssignment = () => {
       // Import here to avoid circular dependency
       const { ServiceBooking } = await import('../models/ServiceBooking');
       
-      const booking = await ServiceBooking.findByPk(bookingId);
+      const booking = await ServiceBooking.findByPk(String(bookingId));
 
       if (!booking) {
         return ApiResponse.notFound(res, 'Booking not found');
@@ -327,7 +327,7 @@ export const verifyAgronomistAssignment = () => {
       // This can be extended to have explicit farm assignments
       const { Farm } = await import('../models/Farm');
       
-      const farm = await Farm.findByPk(farmId);
+      const farm = await Farm.findByPk(String(farmId));
 
       if (!farm) {
         return ApiResponse.notFound(res, 'Farm not found');

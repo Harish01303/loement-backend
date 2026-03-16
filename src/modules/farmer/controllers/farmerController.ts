@@ -65,7 +65,7 @@ export const getNDVI = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { farmId } = req.params;
-        const data = await FarmerService.getNDVIInsights(req.user.id, farmId);
+        const data = await FarmerService.getNDVIInsights(req.user.id, String(farmId));
         res.json({ success: true, data });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
@@ -76,7 +76,7 @@ export const getIoTData = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { farmId } = req.params;
-        const data = await FarmerService.getIoTData(req.user.id, farmId);
+        const data = await FarmerService.getIoTData(req.user.id, String(farmId));
         res.json({ success: true, data });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
@@ -97,7 +97,7 @@ export const markAlertRead = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        await FarmerService.markAlertRead(req.user.id, id);
+        await FarmerService.markAlertRead(req.user.id, String(id));
         res.json({ success: true });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });

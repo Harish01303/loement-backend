@@ -19,7 +19,7 @@ export const markRead = async (req: Request, res: Response) => {
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         }
         const { id } = req.params;
-        const notification = await NotificationService.markAsRead(id, req.user.id);
+        const notification = await NotificationService.markAsRead(String(id), req.user.id);
         res.json({ success: true, notification });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });

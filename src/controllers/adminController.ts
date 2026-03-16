@@ -72,7 +72,7 @@ export const updateUser = async (req: Request, res: Response) => {
         const { id } = req.params;
         const { role, is_active } = req.body;
 
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(String(id));
         if (!user) return res.status(404).json({ success: false, message: 'User not found' });
 
         if (role) user.role = role;
@@ -88,7 +88,7 @@ export const updateUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const user = await User.findByPk(id);
+        const user = await User.findByPk(String(id));
         if (!user) return res.status(404).json({ success: false, message: 'User not found' });
 
         // Soft delete (using is_active if paranoid is not enabled)
@@ -127,7 +127,7 @@ export const updateFarmStatus = async (req: Request, res: Response) => {
         const { id } = req.params;
         const { status } = req.body;
 
-        const farm = await Farm.findByPk(id);
+        const farm = await Farm.findByPk(String(id));
         if (!farm) return res.status(404).json({ success: false, message: 'Farm not found' });
 
         farm.status = status;
@@ -170,7 +170,7 @@ export const updateBookingStatus = async (req: Request, res: Response) => {
         const { id } = req.params;
         const { status, assigned_pilot_id } = req.body;
 
-        const booking = await ServiceBooking.findByPk(id, { transaction });
+        const booking = await ServiceBooking.findByPk(String(id), { transaction });
         if (!booking) {
             await transaction.rollback();
             return res.status(404).json({ success: false, message: 'Booking not found' });

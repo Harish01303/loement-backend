@@ -25,7 +25,7 @@ export const getFarmDetails = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const farm = await AgronomistService.getFarmAnalysis(id);
+        const farm = await AgronomistService.getFarmAnalysis(String(id));
         res.json({ success: true, farm });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
@@ -58,7 +58,7 @@ export const getAdvisoryDetails = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const advisory = await AgronomistService.getAdvisoryDetails(id, req.user.id);
+        const advisory = await AgronomistService.getAdvisoryDetails(String(id), req.user.id);
         res.json({ success: true, advisory });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });
@@ -69,7 +69,7 @@ export const updateAdvisory = async (req: Request, res: Response) => {
     try {
         if (!req.user) return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const advisory = await AgronomistService.updateAdvisory(id, req.user.id, req.body);
+        const advisory = await AgronomistService.updateAdvisory(String(id), req.user.id, req.body);
         res.json({ success: true, advisory });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message });

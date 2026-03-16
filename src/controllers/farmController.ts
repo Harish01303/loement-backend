@@ -84,7 +84,7 @@ export const updateFarm = async (req: Request, res: Response) => {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
     const { id } = req.params;
-    const farm = await Farm.findByPk(id);
+    const farm = await Farm.findByPk(String(id));
     if (!farm) {
       return res.status(404).json({ success: false, message: 'Farm not found' });
     }
@@ -101,7 +101,7 @@ export const deleteFarm = async (req: Request, res: Response) => {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
     const { id } = req.params;
-    const farm = await Farm.findByPk(id);
+    const farm = await Farm.findByPk(String(id));
     if (!farm) {
       return res.status(404).json({ success: false, message: 'Farm not found' });
     }

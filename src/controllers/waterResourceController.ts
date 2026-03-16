@@ -34,7 +34,7 @@ export const updateWaterLevel = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const { water_level } = req.body;
-        const resource = await WaterResource.findByPk(id);
+        const resource = await WaterResource.findByPk(String(id));
         if (!resource) return res.status(404).json({ success: false, message: 'Resource not found' });
 
         resource.water_level = water_level;

@@ -81,7 +81,7 @@ const getNDVI = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { farmId } = req.params;
-        const data = yield farmerService_1.FarmerService.getNDVIInsights(req.user.id, farmId);
+        const data = yield farmerService_1.FarmerService.getNDVIInsights(req.user.id, String(farmId));
         res.json({ success: true, data });
     }
     catch (error) {
@@ -94,7 +94,7 @@ const getIoTData = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { farmId } = req.params;
-        const data = yield farmerService_1.FarmerService.getIoTData(req.user.id, farmId);
+        const data = yield farmerService_1.FarmerService.getIoTData(req.user.id, String(farmId));
         res.json({ success: true, data });
     }
     catch (error) {
@@ -119,7 +119,7 @@ const markAlertRead = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        yield farmerService_1.FarmerService.markAlertRead(req.user.id, id);
+        yield farmerService_1.FarmerService.markAlertRead(req.user.id, String(id));
         res.json({ success: true });
     }
     catch (error) {

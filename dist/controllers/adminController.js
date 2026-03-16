@@ -80,7 +80,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const { id } = req.params;
         const { role, is_active } = req.body;
-        const user = yield User_1.User.findByPk(id);
+        const user = yield User_1.User.findByPk(String(id));
         if (!user)
             return res.status(404).json({ success: false, message: 'User not found' });
         if (role)
@@ -98,7 +98,7 @@ exports.updateUser = updateUser;
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const user = yield User_1.User.findByPk(id);
+        const user = yield User_1.User.findByPk(String(id));
         if (!user)
             return res.status(404).json({ success: false, message: 'User not found' });
         // Soft delete (using is_active if paranoid is not enabled)
@@ -136,7 +136,7 @@ const updateFarmStatus = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const { id } = req.params;
         const { status } = req.body;
-        const farm = yield Farm_1.Farm.findByPk(id);
+        const farm = yield Farm_1.Farm.findByPk(String(id));
         if (!farm)
             return res.status(404).json({ success: false, message: 'Farm not found' });
         farm.status = status;
@@ -178,7 +178,7 @@ const updateBookingStatus = (req, res) => __awaiter(void 0, void 0, void 0, func
     try {
         const { id } = req.params;
         const { status, assigned_pilot_id } = req.body;
-        const booking = yield ServiceBooking_1.ServiceBooking.findByPk(id, { transaction });
+        const booking = yield ServiceBooking_1.ServiceBooking.findByPk(String(id), { transaction });
         if (!booking) {
             yield transaction.rollback();
             return res.status(404).json({ success: false, message: 'Booking not found' });

@@ -49,7 +49,7 @@ const updateWaterLevel = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const { id } = req.params;
         const { water_level } = req.body;
-        const resource = yield WaterResource_1.WaterResource.findByPk(id);
+        const resource = yield WaterResource_1.WaterResource.findByPk(String(id));
         if (!resource)
             return res.status(404).json({ success: false, message: 'Resource not found' });
         resource.water_level = water_level;

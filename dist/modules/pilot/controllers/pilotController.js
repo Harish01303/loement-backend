@@ -41,7 +41,7 @@ const getBookingDetails = (req, res) => __awaiter(void 0, void 0, void 0, functi
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const job = yield pilotService_1.PilotService.getBookingById(id, req.user.id);
+        const job = yield pilotService_1.PilotService.getBookingById(String(id), req.user.id);
         res.json({ success: true, job });
     }
     catch (error) {
@@ -56,7 +56,7 @@ const updateJobStatus = (req, res) => __awaiter(void 0, void 0, void 0, function
         }
         const { id } = req.params;
         const { status } = req.body;
-        const job = yield pilotService_1.PilotService.updateJobStatus(id, req.user.id, status);
+        const job = yield pilotService_1.PilotService.updateJobStatus(String(id), req.user.id, status);
         res.json({ success: true, job });
     }
     catch (error) {
@@ -80,7 +80,7 @@ const uploadSurvey = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             report_url: (_f = (_e = files['report']) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.location,
             preview_url: (_h = (_g = files['preview']) === null || _g === void 0 ? void 0 : _g[0]) === null || _h === void 0 ? void 0 : _h.location,
         };
-        const survey = yield pilotService_1.PilotService.saveSurveyData(req.user.id, id, surveyData);
+        const survey = yield pilotService_1.PilotService.saveSurveyData(req.user.id, String(id), surveyData);
         res.status(201).json({ success: true, survey });
     }
     catch (error) {

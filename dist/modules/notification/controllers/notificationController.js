@@ -30,7 +30,7 @@ const markRead = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         }
         const { id } = req.params;
-        const notification = yield notificationService_1.NotificationService.markAsRead(id, req.user.id);
+        const notification = yield notificationService_1.NotificationService.markAsRead(String(id), req.user.id);
         res.json({ success: true, notification });
     }
     catch (error) {

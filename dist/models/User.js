@@ -37,7 +37,7 @@ __decorate([
         allowNull: true,
         unique: true
     }),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], User.prototype, "mobile", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({

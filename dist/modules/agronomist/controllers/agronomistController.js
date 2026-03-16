@@ -40,7 +40,7 @@ const getFarmDetails = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const farm = yield agronomistService_1.AgronomistService.getFarmAnalysis(id);
+        const farm = yield agronomistService_1.AgronomistService.getFarmAnalysis(String(id));
         res.json({ success: true, farm });
     }
     catch (error) {
@@ -78,7 +78,7 @@ const getAdvisoryDetails = (req, res) => __awaiter(void 0, void 0, void 0, funct
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const advisory = yield agronomistService_1.AgronomistService.getAdvisoryDetails(id, req.user.id);
+        const advisory = yield agronomistService_1.AgronomistService.getAdvisoryDetails(String(id), req.user.id);
         res.json({ success: true, advisory });
     }
     catch (error) {
@@ -91,7 +91,7 @@ const updateAdvisory = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!req.user)
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         const { id } = req.params;
-        const advisory = yield agronomistService_1.AgronomistService.updateAdvisory(id, req.user.id, req.body);
+        const advisory = yield agronomistService_1.AgronomistService.updateAdvisory(String(id), req.user.id, req.body);
         res.json({ success: true, advisory });
     }
     catch (error) {

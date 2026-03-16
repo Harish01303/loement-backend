@@ -234,7 +234,7 @@ const verifyPilotAssignment = () => {
             }
             // Import here to avoid circular dependency
             const { ServiceBooking } = yield Promise.resolve().then(() => __importStar(require('../models/ServiceBooking')));
-            const booking = yield ServiceBooking.findByPk(bookingId);
+            const booking = yield ServiceBooking.findByPk(String(bookingId));
             if (!booking) {
                 return apiResponse_1.ApiResponse.notFound(res, 'Booking not found');
             }
@@ -276,7 +276,7 @@ const verifyAgronomistAssignment = () => {
             // For now, agronomists can see farms they create advisories for
             // This can be extended to have explicit farm assignments
             const { Farm } = yield Promise.resolve().then(() => __importStar(require('../models/Farm')));
-            const farm = yield Farm.findByPk(farmId);
+            const farm = yield Farm.findByPk(String(farmId));
             if (!farm) {
                 return apiResponse_1.ApiResponse.notFound(res, 'Farm not found');
             }

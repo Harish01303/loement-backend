@@ -88,7 +88,7 @@ const updateFarm = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         }
         const { id } = req.params;
-        const farm = yield Farm_1.Farm.findByPk(id);
+        const farm = yield Farm_1.Farm.findByPk(String(id));
         if (!farm) {
             return res.status(404).json({ success: false, message: 'Farm not found' });
         }
@@ -106,7 +106,7 @@ const deleteFarm = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(401).json({ success: false, message: 'Unauthorized' });
         }
         const { id } = req.params;
-        const farm = yield Farm_1.Farm.findByPk(id);
+        const farm = yield Farm_1.Farm.findByPk(String(id));
         if (!farm) {
             return res.status(404).json({ success: false, message: 'Farm not found' });
         }

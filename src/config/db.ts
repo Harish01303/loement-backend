@@ -22,7 +22,7 @@ import { IoTData } from '../models/IoTData';
 import { WaterResource } from '../models/WaterResource';
 
 dotenv.config();
-
+console.log("db_url:",process.env.DATABASE_URL);
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
  
